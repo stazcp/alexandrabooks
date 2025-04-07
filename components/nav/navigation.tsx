@@ -20,7 +20,6 @@ export function Navigation() {
             <NavLink href="/">Home</NavLink>
             <NavLink href="/flying">The Flying</NavLink>
             <NavLink href="/other-books">Other Books</NavLink>
-            <NavLink href="/books">All Books</NavLink>
             <NavLink href="/reviews">Reviews</NavLink>
             <NavLink href="/bio">Bio</NavLink>
             <NavLink href="/contact">Contact</NavLink>
@@ -34,7 +33,6 @@ export function Navigation() {
           <NavLink href="/">Home</NavLink>
           <NavLink href="/flying">Flying</NavLink>
           <NavLink href="/other-books">Other</NavLink>
-          <NavLink href="/books">All Books</NavLink>
           <NavLink href="/reviews">Reviews</NavLink>
           <NavLink href="/bio">Bio</NavLink>
           <NavLink href="/contact">Contact</NavLink>
