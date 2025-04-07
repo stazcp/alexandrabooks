@@ -9,5 +9,5 @@ export interface Book {
   description: string
   series: string
   publicationDate: string
+  isPrimeEligible?: boolean
 }
-

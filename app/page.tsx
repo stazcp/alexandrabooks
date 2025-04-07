@@ -1,16 +1,34 @@
-import type React from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import BookGrid from "@/app/components/book-grid"
+'use client'
+
+import type React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { BookDisplay } from '@/components/book-display'
+import { useBooks } from '@/hooks/useBooks'
 
 export default function Home() {
+  // Use our custom hook to get books data
+  const { getBooksBySeries, isLoading, error } = useBooks()
+
+  // Get all books with limit of 3
+  const featuredBooks = getBooksBySeries(undefined, 3)
+
+  // Get Flying series books
+  const flyingBooks = getBooksBySeries('The Flying')
+
   return (
     <div className="min-h-screen bg-[#f0f0f0] text-gray-800 pattern-bg">
       <div className="container mx-auto px-4 py-6 relative z-10">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center">
-            <Image src="/images/logo.png" alt="Alexandra Books Logo" width={120} height={50} className="h-auto" />
+            <Image
+              src="/images/logo.png"
+              alt="Alexandra Books Logo"
+              width={120}
+              height={50}
+              className="h-auto"
+            />
           </div>
 
           <nav className="hidden md:block">
@@ -18,6 +36,7 @@ export default function Home() {
               <NavLink href="/">Home</NavLink>
               <NavLink href="/flying">The Flying</NavLink>
               <NavLink href="/other-books">Other Books</NavLink>
+              <NavLink href="/books">All Books</NavLink>
               <NavLink href="/reviews">Reviews</NavLink>
               <NavLink href="/bio">Bio</NavLink>
               <NavLink href="/contact">Contact</NavLink>
@@ -30,7 +49,8 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-3 rounded-full shadow-md">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/flying">Flying</NavLink>
-            <NavLink href="/other-books">Books</NavLink>
+            <NavLink href="/other-books">Other</NavLink>
+            <NavLink href="/books">All Books</NavLink>
             <NavLink href="/reviews">Reviews</NavLink>
             <NavLink href="/bio">Bio</NavLink>
             <NavLink href="/contact">Contact</NavLink>
@@ -46,12 +66,15 @@ export default function Home() {
         <section className="max-w-5xl mx-auto mb-16">
           <div className="relative">
             <div className="bg-white rounded-xl p-8 md:p-10 shadow-lg doodle-border">
-              <h2 className="text-3xl md:text-4xl font-black mb-6 text-gray-800 text-center">The Flying Collection</h2>
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-gray-800 text-center">
+                The Flying Collection
+              </h2>
 
               <p className="text-lg text-gray-700 mb-8 leading-relaxed text-center">
-                The visual poems, with colourful and unique graphic designs, take the reader on a superb inner flight.
-                Alexandra is a modern spiritualist, whose poetic style and innovative computer art empower uplift and
-                inspire along the path of spiritual & personal growth.
+                The visual poems, with colourful and unique graphic designs, take the reader on a
+                superb inner flight. Alexandra is a modern spiritualist, whose poetic style and
+                innovative computer art empower uplift and inspire along the path of spiritual &
+                personal growth.
               </p>
 
               <div className="flex justify-center">
@@ -87,11 +110,14 @@ export default function Home() {
                 FLYING<span className="text-gray-500">12</span>
               </div>
               <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                Each book offers a unique "inner flying" along this path of spiritual discovery and personal
-                transformation.
+                Each book offers a unique "inner flying" along this path of spiritual discovery and
+                personal transformation.
               </p>
               <Link href="/flying">
-                <Button variant="outline" className="border-gray-800 text-gray-800 hover:bg-gray-200 rounded-full px-6">
+                <Button
+                  variant="outline"
+                  className="border-gray-800 text-gray-800 hover:bg-gray-200 rounded-full px-6"
+                >
                   Explore the Book
                 </Button>
               </Link>
@@ -104,16 +130,37 @@ export default function Home() {
             Featured Books
           </h2>
 
-          {/* Dynamic book grid with limit of 3 books */}
-          <BookGrid limit={3} />
+          {/* Dynamic book display with limit of 3 books */}
+          <BookDisplay books={featuredBooks} isLoading={isLoading} error={error} />
+
+          <div className="mt-8 text-center">
+            <Link href="/books">
+              <Button className="bg-gray-800 hover:bg-gray-700 text-white border-none shadow-lg px-6 py-5 text-lg rounded-full transition-all duration-300 hover:scale-105 book-shadow">
+                Browse Amazon Catalog
+              </Button>
+            </Link>
+          </div>
         </section>
 
         <section className="max-w-6xl mx-auto">
           <div className="bg-white rounded-xl p-8 md:p-10 shadow-lg doodle-border">
-            <h2 className="text-3xl font-black mb-8 text-center text-gray-800">The Flying Series</h2>
+            <h2 className="text-3xl font-black mb-8 text-center text-gray-800">
+              The Flying Series
+            </h2>
 
-            {/* Dynamic book grid filtered to "The Flying" series */}
-            <BookGrid series="The Flying" />
+            {/* Dynamic book display filtered to "The Flying" series */}
+            <BookDisplay books={flyingBooks} isLoading={isLoading} error={error} />
+
+            <div className="mt-10 text-center">
+              <Link href="/books">
+                <Button
+                  variant="outline"
+                  className="border-gray-800 text-gray-800 hover:bg-gray-200 rounded-full px-6"
+                >
+                  Complete Amazon Collection
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </div>
@@ -132,4 +179,3 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     </Link>
   )
 }
-
