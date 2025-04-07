@@ -54,11 +54,40 @@ export function useBooks() {
     return filteredBooks
   }
 
+  // Function to get all books with optional limit
+  const getAllBooks = (limit?: number) => {
+    if (!books) return []
+
+    if (limit && books.length > limit) {
+      return books.slice(0, limit)
+    }
+
+    return books
+  }
+
+  // Function to get featured books
+  const getBooksByFeatured = (featured: boolean = true, limit?: number) => {
+    if (!books) return []
+
+    // For this implementation, we'll just take the first few books
+    // You could add a 'featured' field to your Book type and filter by that
+    let filteredBooks = featured ? books.slice(0, 3) : []
+
+    // Apply limit if specified
+    if (limit && filteredBooks.length > limit) {
+      filteredBooks = filteredBooks.slice(0, limit)
+    }
+
+    return filteredBooks
+  }
+
   return {
     allBooks,
     isLoading,
     error,
     getBooksBySeries,
+    getAllBooks,
+    getBooksByFeatured,
   }
 }
 

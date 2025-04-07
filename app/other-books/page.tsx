@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 import { BookDisplay } from '@/components/book-display'
 import { useBooks } from '@/hooks/useBooks'
+import { Navigation } from '@/components/nav/navigation'
 
 export default function OtherBooksPage() {
   // Use our custom hook to get books data
@@ -18,29 +19,7 @@ export default function OtherBooksPage() {
   return (
     <div className="min-h-screen bg-[#f0f0f0] text-gray-800 pattern-bg">
       <div className="container mx-auto px-4 py-6 relative z-10">
-        <div className="flex justify-between items-center mb-8">
-          <div className="flex items-center">
-            <Image
-              src="/images/logo.png"
-              alt="Alexandra Books Logo"
-              width={120}
-              height={50}
-              className="h-auto"
-            />
-          </div>
-
-          <nav className="hidden md:block">
-            <div className="flex flex-wrap justify-center gap-2 md:gap-6">
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/flying">The Flying</NavLink>
-              <NavLink href="/other-books">Other Books</NavLink>
-              <NavLink href="/books">All Books</NavLink>
-              <NavLink href="/reviews">Reviews</NavLink>
-              <NavLink href="/bio">Bio</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
-            </div>
-          </nav>
-        </div>
+        <Navigation />
 
         <Link
           href="/"
@@ -97,17 +76,5 @@ export default function OtherBooksPage() {
         </section>
       </div>
     </div>
-  )
-}
-
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      className="px-4 py-2 text-gray-800 hover:text-gray-600 relative group transition-all duration-300 font-medium"
-    >
-      <span>{children}</span>
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
-    </Link>
   )
 }
