@@ -1,10 +1,11 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import type { Book } from "@/app/lib/types"
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import type { Book } from '@/app/lib/types'
+import { AUTHOR_AMAZON_PAGE } from '@/app/lib/fallback-data'
 
 interface BookDetailProps {
   asin: string
@@ -21,23 +22,23 @@ export default function BookDetail({ asin }: BookDetailProps) {
         setLoading(true)
         // In a real implementation, you would fetch a single book by ASIN
         // For now, we'll fetch all books and find the one we want
-        const response = await fetch("/api/books")
+        const response = await fetch('/api/books')
 
         if (!response.ok) {
-          throw new Error("Failed to fetch book")
+          throw new Error('Failed to fetch book')
         }
 
         const data = await response.json()
         const foundBook = data.books.find((b: Book) => b.ASIN === asin)
 
         if (!foundBook) {
-          throw new Error("Book not found")
+          throw new Error('Book not found')
         }
 
         setBook(foundBook)
       } catch (err) {
-        console.error("Error fetching book:", err)
-        setError("Unable to load book details. Please try again later.")
+        console.error('Error fetching book:', err)
+        setError('Unable to load book details. Please try again later.')
       } finally {
         setLoading(false)
       }
@@ -67,7 +68,7 @@ export default function BookDetail({ asin }: BookDetailProps) {
   if (error || !book) {
     return (
       <div className="bg-white p-6 rounded-xl shadow-md text-center">
-        <p className="text-red-500">{error || "Book not found"}</p>
+        <p className="text-red-500">{error || 'Book not found'}</p>
       </div>
     )
   }
@@ -78,7 +79,7 @@ export default function BookDetail({ asin }: BookDetailProps) {
         <div className="md:w-1/3 flex justify-center">
           <div className="relative book-shadow rounded-lg">
             <Image
-              src={book.imageUrl || "/placeholder.svg"}
+              src={book.imageUrl || '/placeholder.svg'}
               alt={book.title}
               width={300}
               height={450}
@@ -105,7 +106,7 @@ export default function BookDetail({ asin }: BookDetailProps) {
             </p>
           </div>
 
-          <Link href={book.detailPageURL} target="_blank">
+          <Link href={book.detailPageURL || AUTHOR_AMAZON_PAGE} target="_blank">
             <Button className="bg-gray-800 hover:bg-gray-700 text-white border-none shadow-lg rounded-full transition-all duration-300 hover:scale-105 book-shadow">
               Buy on Amazon
             </Button>
@@ -115,4 +116,3 @@ export default function BookDetail({ asin }: BookDetailProps) {
     </div>
   )
 }
-

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getBooksByAuthor, processAmazonResponse } from '@/lib/amazon-api'
+import { AUTHOR_AMAZON_PAGE } from '@/app/lib/fallback-data'
 
 // Book interface
 interface Book {
@@ -25,7 +26,7 @@ const mockAmazonBooks: Book[] = [
     imageUrl: '/images/flying12-cover.png',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/dp/B07HMQJW7T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'The twelfth installment in the Flying series takes readers on a journey through visual poetry and spiritual exploration with vibrant colors and dynamic flowing lines.',
     series: 'The Flying',
@@ -38,7 +39,7 @@ const mockAmazonBooks: Book[] = [
     imageUrl: '/images/flying13-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/dp/B07JKLN45P',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'Flying 13 continues the spiritual journey with new visual poems and artistic expressions. The soft pink background creates a gentle contrast with the vibrant flowing elements.',
     series: 'The Flying',
@@ -51,7 +52,7 @@ const mockAmazonBooks: Book[] = [
     imageUrl: '/images/flying14-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/dp/B07NPQF3VX',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'The fourteenth book in the series features a bright yellow background with flowing cyan lines, creating a sense of movement and energy that lifts the spirit.',
     series: 'The Flying',
@@ -64,7 +65,7 @@ const mockAmazonBooks: Book[] = [
     imageUrl: '/images/flying15-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/dp/B07TNKL45M',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'Flying 15 builds upon the foundation of the series, taking readers deeper into the realms of inner exploration with its unique visual style and spiritual insights.',
     series: 'The Flying',
@@ -77,7 +78,7 @@ const mockAmazonBooks: Book[] = [
     imageUrl: '/images/flying16-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/dp/B07ZNP4F3V',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'The sixteenth installment features a stunning orange and yellow color palette with dynamic flowing lines that represent the journey of spiritual awakening.',
     series: 'The Flying',
@@ -90,7 +91,7 @@ const mockAmazonBooks: Book[] = [
     imageUrl: '/images/all-the-stars-cover.jpg',
     price: '14.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/dp/B08HMQJW7T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'A mesmerizing journey through cosmic imagery and spiritual poetry. The vibrant blue background with circular patterns creates a sense of celestial movement and cosmic harmony.',
     series: 'Other Works',
@@ -103,7 +104,7 @@ const mockAmazonBooks: Book[] = [
     imageUrl: '/images/all-blown-up-cover.jpg',
     price: '14.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/dp/B08JKLN45P',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'An explosive collection of visual poetry that expands the mind and spirit. The purple background with flowing orange lines creates a sense of expansion and transformation.',
     series: 'Other Works',
