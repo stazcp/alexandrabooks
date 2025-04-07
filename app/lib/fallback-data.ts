@@ -1,5 +1,9 @@
 import type { Book } from './types'
 
+// Author's Amazon store page URL
+export const AUTHOR_AMAZON_PAGE =
+  'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T'
+
 // Fallback book data for when API calls fail
 export const fallbackBooks: Book[] = [
   {
@@ -9,7 +13,7 @@ export const fallbackBooks: Book[] = [
     imageUrl: '/images/flying12-cover.png',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'The twelfth installment in the Flying series takes readers on a journey through visual poetry.',
     series: 'The Flying',
@@ -22,7 +26,7 @@ export const fallbackBooks: Book[] = [
     imageUrl: '/images/flying13-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'Flying 13 continues the spiritual journey with new visual poems and artistic expressions.',
     series: 'The Flying',
@@ -35,7 +39,7 @@ export const fallbackBooks: Book[] = [
     imageUrl: '/images/flying14-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'The fourteenth book in the Flying series features flowing lines, creating a sense of movement and energy.',
     series: 'The Flying',
@@ -48,7 +52,7 @@ export const fallbackBooks: Book[] = [
     imageUrl: '/images/flying15-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'The fifteenth book in the Flying series continues the spiritual journey with vibrant visuals.',
     series: 'The Flying',
@@ -61,7 +65,7 @@ export const fallbackBooks: Book[] = [
     imageUrl: '/images/flying16-cover.jpg',
     price: '12.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description:
       'The sixteenth book in the Flying series with flowing lines that represent spiritual awakening.',
     series: 'The Flying',
@@ -74,7 +78,7 @@ export const fallbackBooks: Book[] = [
     imageUrl: '/images/all-the-stars-cover.jpg',
     price: '14.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description: 'A mesmerizing journey through cosmic imagery and spiritual poetry.',
     series: 'Other Works',
     publicationDate: '2021-02-18',
@@ -86,7 +90,7 @@ export const fallbackBooks: Book[] = [
     imageUrl: '/images/all-blown-up-cover.jpg',
     price: '14.99',
     currency: 'USD',
-    detailPageURL: 'https://www.amazon.com/stores/Alexandra-Psaropoulou/author/B07HMP374T',
+    detailPageURL: AUTHOR_AMAZON_PAGE,
     description: 'An explosive collection of visual poetry that expands the mind and spirit.',
     series: 'Other Works',
     publicationDate: '2021-09-05',

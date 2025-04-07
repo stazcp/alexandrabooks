@@ -4,7 +4,13 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Book } from '@/app/lib/types'
-import { fallbackBooks, getFallbackImage, getFilteredFallbackBooks } from '@/app/lib/fallback-data'
+import {
+  fallbackBooks,
+  getFallbackImage,
+  getFilteredFallbackBooks,
+  AUTHOR_AMAZON_PAGE,
+} from '@/app/lib/fallback-data'
+import { Button } from '@/components/ui/button'
 
 interface BookDisplayProps {
   books: Book[]
@@ -68,10 +74,13 @@ export function BookDisplay({ books, isLoading, error }: BookDisplayProps) {
       <div>
         <div className="bg-white p-6 rounded-xl shadow-md text-center mb-8">
           <p className="text-amber-500 mb-2">{message}</p>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-4">
             {showFallbacksAfterTimeout
               ? "We're still trying to connect to the API..."
               : 'Showing preview content instead. Please try again later.'}
+          </p>
+          <p className="text-gray-700 mb-4">
+            All links will take you to Alexandra's Amazon store page.
           </p>
         </div>
 
@@ -94,7 +103,15 @@ export function BookDisplay({ books, isLoading, error }: BookDisplayProps) {
   if (displayBooks.length === 0) {
     return (
       <div className="bg-white p-6 rounded-xl shadow-md text-center">
-        <p>No books found in this category.</p>
+        <p className="mb-4">No books found in this category.</p>
+        <p className="mb-6 text-gray-600">
+          You can browse all of Alexandra's books on her Amazon author page.
+        </p>
+        <Button asChild className="bg-gray-800 hover:bg-gray-700">
+          <Link href={AUTHOR_AMAZON_PAGE} target="_blank">
+            Visit Amazon Store
+          </Link>
+        </Button>
       </div>
     )
   }
@@ -116,8 +133,12 @@ function BookCard({ book }: { book: Book }) {
   const displayPrice =
     book.price === 'N/A' ? 'N/A' : book.currency === 'USD' ? `$${book.price}` : book.price
 
+  // Ensure we always have a valid Amazon URL
+  const bookUrl =
+    book.detailPageURL && book.detailPageURL !== '#' ? book.detailPageURL : AUTHOR_AMAZON_PAGE
+
   return (
-    <Link href={book.detailPageURL} target="_blank" className={`group ${animationClass}`}>
+    <Link href={bookUrl} target="_blank" className={`group ${animationClass}`}>
       <div className="relative">
         <div className="relative flex flex-col items-center bg-white p-6 rounded-xl shadow-md transition-all duration-300 book-card">
           <div className="rounded-lg mb-4 book-shadow">

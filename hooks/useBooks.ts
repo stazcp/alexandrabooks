@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import type { Book } from '@/app/lib/types'
-import { fallbackBooks } from '@/app/lib/fallback-data'
+import { fallbackBooks, AUTHOR_AMAZON_PAGE } from '@/app/lib/fallback-data'
 
 /**
  * Custom hook to fetch and manage book data across components
@@ -127,7 +127,7 @@ function normalizeBookData(booksData: any[]): Book[] {
     imageUrl: book.imageUrl || '/images/placeholder-cover.jpg',
     price: book.price || 'N/A',
     currency: book.currency || 'USD',
-    detailPageURL: book.detailPageURL || book.amazonUrl || '#',
+    detailPageURL: book.detailPageURL || book.amazonUrl || AUTHOR_AMAZON_PAGE,
     description: book.description || 'No description available',
     series: book.series || 'Other Works',
     publicationDate: book.publicationDate || 'N/A',
