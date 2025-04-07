@@ -40,12 +40,12 @@ export default function BookGrid({ series, limit }: BookGridProps) {
           title: book.title || 'Untitled Book',
           author: book.author || 'Alexandra Psaropoulou',
           imageUrl: book.imageUrl || '/images/placeholder-cover.jpg',
-          price: book.price || 'N/A',
-          currency: book.currency || 'USD',
+          price: book.price,
+          currency: book.currency,
           detailPageURL: book.detailPageURL || book.amazonUrl || '#',
           description: book.description || 'No description available',
           series: book.series || series || 'Other Works',
-          publicationDate: book.publicationDate || 'N/A',
+          publicationDate: book.publicationDate,
           isPrimeEligible: book.isPrimeEligible || false,
         }))
 
@@ -107,12 +107,17 @@ export default function BookGrid({ series, limit }: BookGridProps) {
 }
 
 function BookCard({ book }: { book: Book }) {
-  const randomDelay = Math.floor(Math.random() * 3)
-  const animationClass = `float-animation float-animation-delay-${randomDelay}`
+  const [animationClass, setAnimationClass] = useState('float-animation')
+
+  // Only run on client-side after hydration
+  useEffect(() => {
+    const randomDelay = Math.floor(Math.random() * 3)
+    setAnimationClass(`float-animation float-animation-delay-${randomDelay}`)
+  }, [])
 
   // Format price display
   const displayPrice =
-    book.price === 'N/A' ? 'N/A' : book.currency === 'USD' ? `$${book.price}` : book.price
+    book.price && book.currency ? (book.currency === 'USD' ? `$${book.price}` : book.price) : null
 
   return (
     <Link href={book.detailPageURL} target="_blank" className={`group ${animationClass}`}>
@@ -130,10 +135,10 @@ function BookCard({ book }: { book: Book }) {
           <h3 className="text-xl font-bold text-gray-800 group-hover:text-gray-600 text-center">
             {book.title}
           </h3>
-          {book.publicationDate !== 'N/A' && (
+          {book.publicationDate && (
             <p className="text-xs text-gray-500 mt-1">{book.publicationDate}</p>
           )}
-          <p className="text-sm text-gray-600 mt-1">{displayPrice}</p>
+          {displayPrice && <p className="text-sm text-gray-600 mt-1">{displayPrice}</p>}
         </div>
       </div>
     </Link>

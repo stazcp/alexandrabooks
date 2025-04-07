@@ -98,12 +98,16 @@ export default function BookDetail({ asin }: BookDetailProps) {
             <p className="text-gray-700">
               <strong>Series:</strong> {book.series}
             </p>
-            <p className="text-gray-700">
-              <strong>Publication Date:</strong> {book.publicationDate}
-            </p>
-            <p className="text-gray-700">
-              <strong>Price:</strong> ${book.price}
-            </p>
+            {book.publicationDate && (
+              <p className="text-gray-700">
+                <strong>Publication Date:</strong> {book.publicationDate}
+              </p>
+            )}
+            {book.price && (
+              <p className="text-gray-700">
+                <strong>Price:</strong> ${book.price}
+              </p>
+            )}
           </div>
 
           <Link href={book.detailPageURL || AUTHOR_AMAZON_PAGE} target="_blank">

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import Providers from './providers'
 import './globals.css'
+import Footer from '@/components/footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,11 +26,7 @@ export default function RootLayout({
         <Providers>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
             {children}
-            <footer className="relative z-10 border-t border-gray-300 mt-20 py-8 bg-[#f0f0f0]">
-              <div className="container mx-auto px-4 text-center text-sm text-gray-600">
-                © {new Date().getFullYear()} Alexandra Books. All rights reserved.
-              </div>
-            </footer>
+            <Footer />
           </ThemeProvider>
         </Providers>
       </body>
